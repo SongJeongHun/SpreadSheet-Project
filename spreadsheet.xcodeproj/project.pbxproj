@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A74D01BD255FC25F0008CC1A /* SpreadSheetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74D01BC255FC25F0008CC1A /* SpreadSheetCollectionViewCell.swift */; };
+		A74D01BD255FC25F0008CC1A /* SpreadSheetLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74D01BC255FC25F0008CC1A /* SpreadSheetLayout.swift */; };
 		A7FF9C8A255FAD3B00EE2D68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FF9C89255FAD3B00EE2D68 /* AppDelegate.swift */; };
 		A7FF9C8C255FAD3B00EE2D68 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FF9C8B255FAD3B00EE2D68 /* SceneDelegate.swift */; };
 		A7FF9C91255FAD3B00EE2D68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FF9C8F255FAD3B00EE2D68 /* Main.storyboard */; };
@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A74D01BC255FC25F0008CC1A /* SpreadSheetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadSheetCollectionViewCell.swift; sourceTree = "<group>"; };
+		A74D01BC255FC25F0008CC1A /* SpreadSheetLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadSheetLayout.swift; sourceTree = "<group>"; };
 		A7FF9C86255FAD3B00EE2D68 /* spreadsheet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spreadsheet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FF9C89255FAD3B00EE2D68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7FF9C8B255FAD3B00EE2D68 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 				A7FF9C94255FAD3C00EE2D68 /* LaunchScreen.storyboard */,
 				A7FF9C97255FAD3C00EE2D68 /* Info.plist */,
 				A7FF9C9F255FB11B00EE2D68 /* SpreadSheetViewController.swift */,
-				A74D01BC255FC25F0008CC1A /* SpreadSheetCollectionViewCell.swift */,
+				A74D01BC255FC25F0008CC1A /* SpreadSheetLayout.swift */,
 			);
 			path = spreadsheet;
 			sourceTree = "<group>";
@@ -141,7 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7FF9CA0255FB11B00EE2D68 /* SpreadSheetViewController.swift in Sources */,
-				A74D01BD255FC25F0008CC1A /* SpreadSheetCollectionViewCell.swift in Sources */,
+				A74D01BD255FC25F0008CC1A /* SpreadSheetLayout.swift in Sources */,
 				A7FF9C8A255FAD3B00EE2D68 /* AppDelegate.swift in Sources */,
 				A7FF9C8C255FAD3B00EE2D68 /* SceneDelegate.swift in Sources */,
 			);
