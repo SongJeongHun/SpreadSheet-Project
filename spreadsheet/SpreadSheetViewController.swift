@@ -21,6 +21,15 @@ class SpreadSheetViewController: UIViewController {
         print("collectionView.contentSize---------->\(collectionView.contentSize)")
     }
 }
+extension SpreadSheetViewController:UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let row = indexPath.section
+        var int:UInt8 = 64 + UInt8(indexPath.row)
+        var string = ""
+        string.append(Character(UnicodeScalar(int)))
+        print(" \(row) 행 \(string) 열 입니다.")
+    }
+}
 extension SpreadSheetViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 100 //-> 행의 개수(row)
