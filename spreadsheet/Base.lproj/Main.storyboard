@@ -17,15 +17,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="my1-Et-j3c">
-                                <rect key="frame" x="0.0" y="73" width="414" height="709"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목 없는 스프레드시트" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fl0-uo-kjp">
+                                <rect key="frame" x="10" y="48" width="164" height="21.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="my1-Et-j3c">
+                                <rect key="frame" x="0.0" y="106" width="414" height="709"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WkW-BF-bE9">
                                         <rect key="frame" x="0.0" y="0.0" width="800" height="2500"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="800" id="TKP-0i-kuw"/>
-                                            <constraint firstAttribute="height" constant="2500" id="tFa-pZ-rAb"/>
+                                            <constraint firstAttribute="height" constant="2500" id="jpm-kb-gvo"/>
+                                            <constraint firstAttribute="width" constant="800" id="ohk-N6-wUK"/>
                                         </constraints>
                                         <collectionViewLayout key="collectionViewLayout" id="MXy-ui-YXZ" customClass="SpreadSheetLayout" customModule="spreadsheet" customModuleProvider="target"/>
                                         <cells>
@@ -36,8 +42,8 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="101" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5cf-tJ-2Za">
-                                                            <rect key="frame" x="35.5" y="2" width="30" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5cf-tJ-2Za">
+                                                            <rect key="frame" x="50.5" y="12.5" width="0.0" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -61,32 +67,27 @@
                                     </collectionView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="WkW-BF-bE9" firstAttribute="leading" secondItem="my1-Et-j3c" secondAttribute="leading" id="fpz-bJ-hQd"/>
-                                    <constraint firstItem="WkW-BF-bE9" firstAttribute="top" secondItem="my1-Et-j3c" secondAttribute="top" id="qDj-l2-Lzy"/>
+                                    <constraint firstItem="WkW-BF-bE9" firstAttribute="leading" secondItem="my1-Et-j3c" secondAttribute="leading" id="Kch-PZ-auS"/>
+                                    <constraint firstItem="WkW-BF-bE9" firstAttribute="top" secondItem="my1-Et-j3c" secondAttribute="top" id="cSb-8q-TcW"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="GNa-wn-Eit"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="V0c-R7-YgY"/>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목 없는 스프레드시트" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fl0-uo-kjp">
-                                <rect key="frame" x="10" y="48" width="164" height="21.5"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NWz-tS-mnL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Fl0-uo-kjp" firstAttribute="top" secondItem="3vu-ew-oGb" secondAttribute="topMargin" constant="4" id="14i-k8-y7T"/>
-                            <constraint firstItem="my1-Et-j3c" firstAttribute="top" secondItem="NWz-tS-mnL" secondAttribute="top" constant="29" id="EMt-gf-XKh"/>
-                            <constraint firstItem="NWz-tS-mnL" firstAttribute="bottom" secondItem="my1-Et-j3c" secondAttribute="bottom" constant="80" id="KPO-L4-hj0"/>
-                            <constraint firstItem="NWz-tS-mnL" firstAttribute="trailing" secondItem="my1-Et-j3c" secondAttribute="trailing" id="NVt-en-y8g"/>
-                            <constraint firstItem="my1-Et-j3c" firstAttribute="leading" secondItem="NWz-tS-mnL" secondAttribute="leading" id="S7n-1h-LwE"/>
-                            <constraint firstItem="Fl0-uo-kjp" firstAttribute="leading" secondItem="NWz-tS-mnL" secondAttribute="leading" constant="10" id="kYv-43-09y"/>
+                            <constraint firstAttribute="trailing" secondItem="my1-Et-j3c" secondAttribute="trailing" id="3ek-vH-nVZ"/>
+                            <constraint firstItem="Fl0-uo-kjp" firstAttribute="leading" secondItem="NWz-tS-mnL" secondAttribute="leading" constant="10" id="AZY-OH-xZ4"/>
+                            <constraint firstItem="Fl0-uo-kjp" firstAttribute="top" secondItem="NWz-tS-mnL" secondAttribute="top" constant="4" id="Al7-9B-gD9"/>
+                            <constraint firstItem="my1-Et-j3c" firstAttribute="leading" secondItem="3vu-ew-oGb" secondAttribute="leading" id="K9C-IJ-SxU"/>
+                            <constraint firstItem="NWz-tS-mnL" firstAttribute="bottom" secondItem="my1-Et-j3c" secondAttribute="bottom" constant="47" id="iU5-nA-NU8"/>
+                            <constraint firstItem="my1-Et-j3c" firstAttribute="top" secondItem="NWz-tS-mnL" secondAttribute="top" constant="62" id="tYv-bf-zU6"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="WkW-BF-bE9" id="ra5-Wp-F6u"/>
+                        <outlet property="scollView" destination="my1-Et-j3c" id="L2q-0K-2Ay"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c6Z-Ve-7om" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -15,8 +15,7 @@ class SpreadSheetLayout: UICollectionViewLayout {
     var cellLayout = [[UICollectionViewLayoutAttributes]]()
     override func prepare() {
         guard let collectionView = collectionView else {return}
-            print("cellcreate")
-            cell(collectionView: collectionView)
+        cell(collectionView: collectionView)
     }
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return cellLayout[indexPath.section][indexPath.row]
@@ -24,10 +23,6 @@ class SpreadSheetLayout: UICollectionViewLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         return sectionAttributes
     }
-//    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-//        false
-//    }
- 
     func cell(collectionView:UICollectionView){
         var x = 0
         var y = 0
@@ -37,7 +32,7 @@ class SpreadSheetLayout: UICollectionViewLayout {
                 let indexPath = IndexPath(item: index, section: section)
                 let layout = UICollectionViewLayoutAttributes(forCellWith: indexPath)
                 layout.frame = CGRect(x: x, y: y, width: width, height: height)
-//                print("x:\(x),y:\(y),colums:\(currentCol)")
+                //                print("x:\(x),y:\(y),colums:\(currentCol)")
                 sectionAttributes.append(layout)
                 x += width
                 if x / width == colums {
@@ -48,7 +43,7 @@ class SpreadSheetLayout: UICollectionViewLayout {
             }
             cellLayout.append(sectionAttributes)
         }
-        
+   
     }
     
 }
