@@ -43,8 +43,6 @@ class SpreadSheetLayout: UICollectionViewLayout {
             }
             cellLayout.append(sectionAttributes)
         }
-   
     }
-    
 }
 
