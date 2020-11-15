@@ -15,7 +15,7 @@ class SpreadSheetLayout: UICollectionViewLayout {
     var cellLayout = [[UICollectionViewLayoutAttributes]]()
     override func prepare() {
         guard let collectionView = collectionView else {return}
-        cell(collectionView: collectionView)
+        createCell(collectionView: collectionView)
     }
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return cellLayout[indexPath.section][indexPath.row]
@@ -23,7 +23,7 @@ class SpreadSheetLayout: UICollectionViewLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         return sectionAttributes
     }
-    func cell(collectionView:UICollectionView){
+    func createCell(collectionView:UICollectionView){
         var x = 0
         var y = 0
         var currentCol = 0
