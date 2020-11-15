@@ -32,7 +32,6 @@ class SpreadSheetLayout: UICollectionViewLayout {
                 let indexPath = IndexPath(item: index, section: section)
                 let layout = UICollectionViewLayoutAttributes(forCellWith: indexPath)
                 layout.frame = CGRect(x: x, y: y, width: width, height: height)
-                //                print("x:\(x),y:\(y),colums:\(currentCol)")
                 sectionAttributes.append(layout)
                 x += width
                 if x / width == colums {
