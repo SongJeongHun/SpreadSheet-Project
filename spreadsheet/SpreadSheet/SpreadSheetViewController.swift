@@ -1,4 +1,20 @@
+/*  -DTO-
+ -셀의 데이터:[[Any?]]
+ -셀들의 속성:[[CellAttributes]] , 셀의 (이미지 or 텍스트 or URL) 타입:String ?
+ -연결된 인원:[인원정보]
+ -선택된 셀:[인원정보.이름:[선택된셀]]
+ */
 
+/*  -스택-
+ -셀 선택, 셀 합치기
+ -셀 병합?
+ -셀 데이터 수정
+ -행간 늘리기?
+ -행,열 개수 늘리기
+ -많은 데이터 불러오기
+ -0행 0열 고정?
+ -셀 레이아웃
+ */
 import UIKit
 
 class SpreadSheetViewController: UIViewController {
@@ -6,12 +22,12 @@ class SpreadSheetViewController: UIViewController {
     let width = 100
     let height = 25
     var contentSize: CGSize = .zero
-    let cellManager = cellManage()
+    let cellManager = CellManage()
     @IBOutlet weak var collectionView:UICollectionView!
     @IBOutlet weak var scollView:UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.isScrollEnabled = true
+        scollView.isScrollEnabled = true
         initSize()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -50,12 +66,14 @@ class spreadSheetCell:UICollectionViewCell{
     @IBOutlet weak var test:UILabel!
     //    @IBOutlet weak var text:UITextField!
 }
-class cellManage{
+class CellManage{
     var selectedCell:[UICollectionViewCell] = []
+    var unSelectedCell:[UICollectionViewCell] = []
     func activeCell(_ collectionView: UICollectionView,_ indexPath: IndexPath){
         //셀활성화 --------> 나중에 여기에 connect 콜?
         if let cell = collectionView.cellForItem(at: indexPath) as? spreadSheetCell{
             collectionView.performBatchUpdates({
+                self.unSelectedCell.append(cell)
                 cell.backgroundColor = #colorLiteral(red: 0.9832558036, green: 0.7072585225, blue: 0.7842617035, alpha: 1)
                 cell.layer.borderColor = #colorLiteral(red: 0.6856962442, green: 0.03890464455, blue: 0.2881740928, alpha: 1)
                 cell.layer.borderWidth = 2
