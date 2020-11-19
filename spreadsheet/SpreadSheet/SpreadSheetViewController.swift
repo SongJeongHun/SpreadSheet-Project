@@ -24,28 +24,14 @@ class SpreadSheetViewController: UIViewController {
     var contentSize: CGSize = .zero
     let cellManager = CellManage()
     @IBOutlet weak var collectionView:UICollectionView!
-    @IBOutlet weak var scollView:UIScrollView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        scollView.isScrollEnabled = true
-        print(collectionView.isScrollEnabled)
-        initSize()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    func initSize(){
-        contentSize = CGSize(width:width * colums , height: height * collectionView.numberOfSections)
-        for i in collectionView.constraints{
-            if i.identifier == "height"{
-                i.constant = contentSize.height
-            }else if i.identifier == "width"{
-                i.constant = contentSize.width
-            }
-        }
-        collectionView.contentSize = contentSize
-        scollView.contentSize = contentSize
-    }
+    
 }
 extension SpreadSheetViewController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -56,8 +42,10 @@ extension SpreadSheetViewController:UICollectionViewDelegate{
             return cellManager.activeCell(self.collectionView,indexPath)
         }
     }
+    
 }
 extension SpreadSheetViewController: UICollectionViewDataSource {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 100 + 1//-> 행의 개수(row)
     }
@@ -74,12 +62,13 @@ class spreadSheetCell:UICollectionViewCell{
 }
 class CellManage{
     var selectedCell:[UICollectionViewCell] = []
-//    var unSelectedCell:[UICollectionViewCell] = []
+    //    var unSelectedCell:[UICollectionViewCell] = []
     func activeCell(_ collectionView: UICollectionView,_ indexPath: IndexPath){
         //셀활성화 --------> 나중에 여기에 connect 콜?
         if let cell = collectionView.cellForItem(at: indexPath) as? spreadSheetCell{
+            print("\(indexPath.section),\(indexPath.row)")
             collectionView.performBatchUpdates({
-//                self.unSelectedCell.append(cell)
+                //                self.unSelectedCell.append(cell)
                 cell.backgroundColor = #colorLiteral(red: 0.7833575606, green: 0.9629107118, blue: 0.6487889886, alpha: 1)
                 cell.layer.borderColor = #colorLiteral(red: 0.09923628718, green: 0.3880366087, blue: 0.109238632, alpha: 1)
                 cell.layer.borderWidth = 2
@@ -87,7 +76,7 @@ class CellManage{
             }, completion: nil)
         }
         let row = indexPath.section
-        let int:UInt8 = 64 + UInt8(indexPath.row)
+        let int:UInt8 = 64 + UInt8(indexPath.item)
         var string = ""
         string.append(Character(UnicodeScalar(int)))
         print(" \(row) 행 \(string) 열")
@@ -96,7 +85,7 @@ class CellManage{
     func inactiveCell(_ collectionView: UICollectionView,_ indexPath: IndexPath){
         if let cell = collectionView.cellForItem(at: indexPath) as? spreadSheetCell{
             collectionView.performBatchUpdates({
-//                self.unSelectedCell.append(cell)
+                //                self.unSelectedCell.append(cell)
                 cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 cell.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
                 cell.layer.borderWidth = 0.5
@@ -110,23 +99,29 @@ class CellManage{
         cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         cell.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         cell.layer.borderWidth = 0.5
-        let cellRow = indexPath.section
-        let cellCol = indexPath.row
-        if cellRow == 0{
-            let int:UInt8 = 64 + UInt8(cellCol)
-            var string = ""
-            string.append(Character(UnicodeScalar(int)))
-            cell.test.text = string
-            cell.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        }
-        if cellCol == 0{
-            cell.test.text = String(cellRow)
-            cell.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        }
-        if cellRow == 0 && cellCol == 0{
-            cell.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-            cell.test.text = ""
+        print(indexPath)
+        if indexPath.section == 0{
+            if indexPath.row == 0{
+                cell.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+                cell.test.text = ""
+            }else{
+                let int:UInt8 = 64 + UInt8(indexPath.item)
+                var string = ""
+                string.append(Character(UnicodeScalar(int)))
+                cell.test.text = string
+                cell.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            }
+        }else{
+            if indexPath.row == 0{
+                cell.test.text = String(indexPath.section)
+                cell.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            }else{
+                cell.test.text = ""
+                
+            }
         }
         return cell
     }
 }
+
+
