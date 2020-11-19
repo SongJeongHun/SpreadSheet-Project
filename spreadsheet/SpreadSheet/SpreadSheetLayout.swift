@@ -4,8 +4,6 @@
 //
 //  Created by 송정훈 on 2020/11/14.
 //
-
-
 import UIKit
 
 class SpreadSheetLayout: UICollectionViewLayout {
@@ -17,6 +15,7 @@ class SpreadSheetLayout: UICollectionViewLayout {
     override func prepare() {
         guard let collectionView = collectionView else {return}
         createCell(collectionView: collectionView)
+      
     }
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return cellLayout[indexPath.section][indexPath.row]

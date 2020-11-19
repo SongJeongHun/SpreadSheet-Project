@@ -12,7 +12,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="jPP-vj-F6N">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uie-rR-PWB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="5LC-qd-m8r" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q9S-I4-jVi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -26,6 +25,7 @@
                         <segue destination="xyT-7T-9sj" kind="relationship" relationship="viewControllers" id="n8M-GG-ymx"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uie-rR-PWB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-493" y="243"/>
         </scene>
@@ -103,7 +103,7 @@
                                     <outlet property="delegate" destination="bFo-Pf-KEB" id="Tef-WP-Dbz"/>
                                 </connections>
                             </tableView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PWa-Va-gxq">
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PWa-Va-gxq">
                                 <rect key="frame" x="0.0" y="34" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
@@ -129,7 +129,7 @@
             </objects>
             <point key="canvasLocation" x="627.536231884058" y="727.90178571428567"/>
         </scene>
-        <!--시트-->
+        <!--새 시트-->
         <scene sceneID="wof-Bg-1ri">
             <objects>
                 <viewController id="xyT-7T-9sj" customClass="SpreadSheetViewController" customModule="spreadsheet" customModuleProvider="target" sceneMemberID="viewController">
@@ -205,7 +205,7 @@
                             <constraint firstItem="my1-Et-j3c" firstAttribute="top" secondItem="NWz-tS-mnL" secondAttribute="top" constant="62" id="tYv-bf-zU6"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="시트" image="newspaper" catalog="system" id="cGe-Cv-Sma"/>
+                    <tabBarItem key="tabBarItem" title="새 시트" image="newspaper" catalog="system" id="cGe-Cv-Sma"/>
                     <connections>
                         <outlet property="collectionView" destination="WkW-BF-bE9" id="ra5-Wp-F6u"/>
                         <outlet property="scollView" destination="my1-Et-j3c" id="L2q-0K-2Ay"/>
@@ -213,7 +213,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c6Z-Ve-7om" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="628" y="-16"/>
+            <point key="canvasLocation" x="627.536231884058" y="-16.071428571428569"/>
         </scene>
     </scenes>
     <resources>

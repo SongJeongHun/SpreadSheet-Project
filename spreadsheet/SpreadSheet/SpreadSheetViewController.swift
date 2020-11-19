@@ -28,6 +28,7 @@ class SpreadSheetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         scollView.isScrollEnabled = true
+        print(collectionView.isScrollEnabled)
         initSize()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -48,7 +49,12 @@ class SpreadSheetViewController: UIViewController {
 }
 extension SpreadSheetViewController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        cellManager.activeCell(self.collectionView,indexPath)
+        let cell = collectionView.cellForItem(at: indexPath)!
+        if cellManager.selectedCell.contains(cell){
+            return cellManager.inactiveCell(self.collectionView,indexPath)
+        }else{
+            return cellManager.activeCell(self.collectionView,indexPath)
+        }
     }
 }
 extension SpreadSheetViewController: UICollectionViewDataSource {
@@ -68,14 +74,14 @@ class spreadSheetCell:UICollectionViewCell{
 }
 class CellManage{
     var selectedCell:[UICollectionViewCell] = []
-    var unSelectedCell:[UICollectionViewCell] = []
+//    var unSelectedCell:[UICollectionViewCell] = []
     func activeCell(_ collectionView: UICollectionView,_ indexPath: IndexPath){
         //셀활성화 --------> 나중에 여기에 connect 콜?
         if let cell = collectionView.cellForItem(at: indexPath) as? spreadSheetCell{
             collectionView.performBatchUpdates({
-                self.unSelectedCell.append(cell)
-                cell.backgroundColor = #colorLiteral(red: 0.9832558036, green: 0.7072585225, blue: 0.7842617035, alpha: 1)
-                cell.layer.borderColor = #colorLiteral(red: 0.6856962442, green: 0.03890464455, blue: 0.2881740928, alpha: 1)
+//                self.unSelectedCell.append(cell)
+                cell.backgroundColor = #colorLiteral(red: 0.7833575606, green: 0.9629107118, blue: 0.6487889886, alpha: 1)
+                cell.layer.borderColor = #colorLiteral(red: 0.09923628718, green: 0.3880366087, blue: 0.109238632, alpha: 1)
                 cell.layer.borderWidth = 2
                 self.selectedCell.append(cell)
             }, completion: nil)
@@ -85,7 +91,19 @@ class CellManage{
         var string = ""
         string.append(Character(UnicodeScalar(int)))
         print(" \(row) 행 \(string) 열")
-        print("Selected Cell --------->\(selectedCell.count)")
+        print("Selected Cell --------->\(selectedCell)")
+    }
+    func inactiveCell(_ collectionView: UICollectionView,_ indexPath: IndexPath){
+        if let cell = collectionView.cellForItem(at: indexPath) as? spreadSheetCell{
+            collectionView.performBatchUpdates({
+//                self.unSelectedCell.append(cell)
+                cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                cell.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+                cell.layer.borderWidth = 0.5
+                self.selectedCell = selectedCell.filter({$0 != cell})
+            }, completion: nil)
+            print("Selected Cell --------->\(selectedCell)")
+        }
     }
     func cellForItem(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> UICollectionViewCell{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "spreadSheetCell", for: indexPath) as? spreadSheetCell else{ return UICollectionViewCell() }

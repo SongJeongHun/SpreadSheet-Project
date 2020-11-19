@@ -29,6 +29,7 @@ extension SpreadListViewController:UITableViewDataSource{
         //옆으로 스와이프 해서 삭제
         if editingStyle == .delete {
             //삭제 구현
+            let alert:UIAlertAction
         } else if editingStyle == .insert {
         }
     }
