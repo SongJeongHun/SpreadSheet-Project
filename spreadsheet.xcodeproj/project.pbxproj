@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A72922C825667F43001C44CC /* CellManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72922C725667F43001C44CC /* CellManage.swift */; };
 		A74D01BD255FC25F0008CC1A /* SpreadSheetLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74D01BC255FC25F0008CC1A /* SpreadSheetLayout.swift */; };
 		A75B25CD2562647A0085E674 /* SpreadListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B25CC2562647A0085E674 /* SpreadListViewController.swift */; };
 		A7FF9C8A255FAD3B00EE2D68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FF9C89255FAD3B00EE2D68 /* AppDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A72922C725667F43001C44CC /* CellManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellManage.swift; sourceTree = "<group>"; };
 		A74D01BC255FC25F0008CC1A /* SpreadSheetLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadSheetLayout.swift; sourceTree = "<group>"; };
 		A75B25CC2562647A0085E674 /* SpreadListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadListViewController.swift; sourceTree = "<group>"; };
 		A7FF9C86255FAD3B00EE2D68 /* spreadsheet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spreadsheet.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +46,7 @@
 		A75B25C0256263830085E674 /* SpreadSheet */ = {
 			isa = PBXGroup;
 			children = (
+				A72922C725667F43001C44CC /* CellManage.swift */,
 				A7FF9C9F255FB11B00EE2D68 /* SpreadSheetViewController.swift */,
 				A74D01BC255FC25F0008CC1A /* SpreadSheetLayout.swift */,
 			);
@@ -169,6 +172,7 @@
 			files = (
 				A75B25CD2562647A0085E674 /* SpreadListViewController.swift in Sources */,
 				A7FF9CA0255FB11B00EE2D68 /* SpreadSheetViewController.swift in Sources */,
+				A72922C825667F43001C44CC /* CellManage.swift in Sources */,
 				A74D01BD255FC25F0008CC1A /* SpreadSheetLayout.swift in Sources */,
 				A7FF9C8A255FAD3B00EE2D68 /* AppDelegate.swift in Sources */,
 				A7FF9C8C255FAD3B00EE2D68 /* SceneDelegate.swift in Sources */,
