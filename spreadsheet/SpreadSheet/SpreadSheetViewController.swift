@@ -40,11 +40,10 @@ extension SpreadSheetViewController:UICollectionViewDelegate{
             return cellManager.activeCell(self.collectionView,indexPath)
         }
     }
-    
 }
 extension SpreadSheetViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1000 + 1//-> 행의 개수(row)
+        return 100 + 1//-> 행의 개수(row)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return colums    //-> 열의 개수(A~G)(col)
