@@ -6,41 +6,78 @@
 //
 //● Frame
 //정의 : SuperView(상위뷰)의 좌표시스템안에서 View의 위치와 크기를 나타냅니다.
-//
 //frame의 핵심. 바로 SuperView(상위뷰)입니다. 이때, 상위뷰라는 것은 한단계 상위뷰를 의미해요.
-//ounds
-//
+//● Bounds
+
 //정의 : View의 위치와 크기를 자신만의 좌표시스템안에서 나타냅니다.
-//
 //bounds의 핵심. 바로 자신만의 좌표시스템을 쓴다는 것입니다.
 import UIKit
 
 class SpreadSheetLayout: UICollectionViewLayout {
-    let colums = 8
-    let width = 100
-    let height = 25
-    var contentSize: CGSize = .zero
-    var sectionAttributes = [UICollectionViewLayoutAttributes]()
-    var cellLayout = [[UICollectionViewLayoutAttributes]]()
-    
+    let sheetModel = layoutModel()
     override func prepare() {
         guard let collectionView = collectionView else {return}
-        if cellLayout.count != collectionView.numberOfSections {
-            createCell(collectionView: collectionView)
+        if sheetModel.layoutAttributes.count != collectionView.numberOfSections {
+            sheetModel.createCell(collectionView: collectionView)
             return
         }
+        let forElement = layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 0, height: 0))!
+        sheetModel.stickyCell(at: collectionView,forElement: forElement)
+    }
+    override var collectionViewContentSize: CGSize {
+        return sheetModel.contentSize
+    }
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        return sheetModel.layoutAttributes[indexPath.section][indexPath.row]
+    }
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        return sheetModel.sectionAttribute
+    }
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        true
+    }
+}
+class layoutModel{
+    var contentSize:CGSize = .zero
+    var sectionAttribute:[UICollectionViewLayoutAttributes] = []
+    var layoutAttributes:[[UICollectionViewLayoutAttributes]] = []
+    var cellStandard:layoutStandard = layoutStandard(colums: 8, width: 100, height: 25)
+    func initLayout(colums: Int, width: Int, height: Int){
+        cellStandard = layoutStandard(colums: colums, width: width, height: height)
+    }
+    func createCell(collectionView:UICollectionView){
+        var x = 0
+        var y = 0
+        var contentwidth:CGFloat = 0
         for section in 0..<collectionView.numberOfSections{
-            for index in 0..<colums{
-                let indexPath = IndexPath(item:index ,section: section)
-                let layouts = layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 0, height: 0))!
-                let indexs = colums*section
-               
+            for index in 0..<cellStandard.colums{
+                let indexPath = IndexPath(item: index, section: section)
+                let layout = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+                layout.frame = CGRect(x: x, y: y, width: cellStandard.width, height: cellStandard.height)
+                sectionAttribute.append(layout)
+                x += cellStandard.width
+                if x / cellStandard.width == cellStandard.colums {
+                    contentwidth = CGFloat(x)
+                    x = 0
+                    y += cellStandard.height
+                }
+            }
+            layoutAttributes.append(sectionAttribute)
+        }
+        if let layout = layoutAttributes.last?.last {
+            contentSize = CGSize(width: contentwidth, height: layout.frame.maxY)
+        }
+    }
+    func stickyCell(at collectionView:UICollectionView,forElement : [UICollectionViewLayoutAttributes]){
+        for section in 0..<collectionView.numberOfSections{
+            for index in 0..<cellStandard.colums{
+                let layouts = forElement
+                let indexs = cellStandard.colums*section
                 var frame = layouts[indexs].frame
                 frame.origin.x = collectionView.contentOffset.x
                 layouts[indexs].frame = frame
                 layouts[indexs].zIndex = 100
-                let layout = layoutAttributesForItem(at: indexPath)!
-            
+                let layout = layouts[index]
                 if section == 0{
                     var frame = layout.frame
                     frame.origin.y = collectionView.contentOffset.y
@@ -50,42 +87,14 @@ class SpreadSheetLayout: UICollectionViewLayout {
             }
         }
     }
-    override var collectionViewContentSize: CGSize {
-        return contentSize
-    }
-    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return cellLayout[indexPath.section][indexPath.row]
-    }
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        return sectionAttributes
-    }
-    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        true
-    }
-    private func createCell(collectionView:UICollectionView){
-        var x = 0
-        var y = 0
-        var contentwidth:CGFloat = 0
-        var currentCol = 0
-        for section in 0..<collectionView.numberOfSections{
-            for index in 0..<colums{
-                let indexPath = IndexPath(item: index, section: section)
-                let layout = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-                layout.frame = CGRect(x: x, y: y, width: width, height: height)
-                sectionAttributes.append(layout)
-                x += width
-                if x / width == colums {
-                    contentwidth = CGFloat(x)
-                    currentCol += 1
-                    x = 0
-                    y += height
-                }
-            }
-            cellLayout.append(sectionAttributes)
-        }
-        if let layout = cellLayout.last?.last {
-            contentSize = CGSize(width: contentwidth, height: layout.frame.maxY)
-        }
+}
+struct layoutStandard{
+    let colums:Int
+    let width:Int
+    let height:Int
+    init(colums:Int,width:Int,height:Int){
+        self.colums = colums
+        self.width = width
+        self.height = height
     }
 }
-

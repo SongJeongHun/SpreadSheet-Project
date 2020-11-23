@@ -5,7 +5,7 @@
  -선택된 셀:[인원정보.이름:[선택된셀]]
  */
 
-/*  -스택-
+/*  -기술-
  -셀 선택, 셀 합치기
  -셀 병합?
  -셀 데이터 수정
@@ -18,17 +18,12 @@
 import UIKit
 
 class SpreadSheetViewController: UIViewController {
-    let colums = 8
-    let width = 100
-    let height = 25
-    var contentSize: CGSize = .zero
+    let sheetModel = layoutModel()
     let cellManager = CellManage()
     @IBOutlet weak var collectionView:UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
     }
 }
 extension SpreadSheetViewController:UICollectionViewDelegate{
@@ -46,7 +41,7 @@ extension SpreadSheetViewController: UICollectionViewDataSource {
         return 100 + 1//-> 행의 개수(row)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return colums    //-> 열의 개수(A~G)(col)
+        return sheetModel.cellStandard.colums    //-> 열의 개수(A~G)(col)
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return cellManager.cellForItem(self.collectionView,indexPath)
@@ -54,8 +49,4 @@ extension SpreadSheetViewController: UICollectionViewDataSource {
 }
 class spreadSheetCell:UICollectionViewCell{
     @IBOutlet weak var test:UILabel!
-    //    @IBOutlet weak var text:UITextField!
 }
-
-
-
