@@ -22,7 +22,7 @@ class SpreadSheetLayout: UICollectionViewLayout {
             return
         }
         let forElement = layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 0, height: 0))!
-        sheetModel.stickyCell(at: collectionView,forElement: forElement)
+        sheetModel.stickyHeader(at: collectionView,forElement: forElement)
     }
     override var collectionViewContentSize: CGSize {
         return sheetModel.contentSize
@@ -39,6 +39,7 @@ class SpreadSheetLayout: UICollectionViewLayout {
 }
 class layoutModel{
     var contentSize:CGSize = .zero
+    var numberOfSections = 100 + 1
     var sectionAttribute:[UICollectionViewLayoutAttributes] = []
     var layoutAttributes:[[UICollectionViewLayoutAttributes]] = []
     var cellStandard:layoutStandard = layoutStandard(colums: 8, width: 100, height: 25)
@@ -68,7 +69,7 @@ class layoutModel{
             contentSize = CGSize(width: contentwidth, height: layout.frame.maxY)
         }
     }
-    func stickyCell(at collectionView:UICollectionView,forElement : [UICollectionViewLayoutAttributes]){
+    func stickyHeader(at collectionView:UICollectionView,forElement : [UICollectionViewLayoutAttributes]){
         for section in 0..<collectionView.numberOfSections{
             for index in 0..<cellStandard.colums{
                 let layouts = forElement
