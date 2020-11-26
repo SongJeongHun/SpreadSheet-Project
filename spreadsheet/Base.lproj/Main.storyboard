@@ -182,14 +182,14 @@
                                 <rect key="frame" x="365" y="48" width="39" height="42"/>
                                 <state key="normal" title="열추가"/>
                                 <connections>
-                                    <action selector="addrow:" destination="xyT-7T-9sj" eventType="touchUpInside" id="ezg-YZ-9NQ"/>
+                                    <action selector="addCol:" destination="xyT-7T-9sj" eventType="touchUpInside" id="ieV-fE-I7Y"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LdU-uW-gPd">
                                 <rect key="frame" x="306" y="54" width="39" height="30"/>
                                 <state key="normal" title="행추가"/>
                                 <connections>
-                                    <action selector="addCol:" destination="xyT-7T-9sj" eventType="touchUpInside" id="V0r-HQ-GeQ"/>
+                                    <action selector="addRow:" destination="xyT-7T-9sj" eventType="touchUpInside" id="iQy-KH-Upx"/>
                                 </connections>
                             </button>
                         </subviews>
