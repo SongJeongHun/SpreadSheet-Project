@@ -178,15 +178,35 @@
                                     <outlet property="delegate" destination="xyT-7T-9sj" id="QZS-xd-yit"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNF-LI-aJx">
+                                <rect key="frame" x="365" y="48" width="39" height="42"/>
+                                <state key="normal" title="열추가"/>
+                                <connections>
+                                    <action selector="addrow:" destination="xyT-7T-9sj" eventType="touchUpInside" id="ezg-YZ-9NQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LdU-uW-gPd">
+                                <rect key="frame" x="306" y="54" width="39" height="30"/>
+                                <state key="normal" title="행추가"/>
+                                <connections>
+                                    <action selector="addCol:" destination="xyT-7T-9sj" eventType="touchUpInside" id="V0r-HQ-GeQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NWz-tS-mnL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="kNF-LI-aJx" firstAttribute="top" secondItem="NWz-tS-mnL" secondAttribute="top" constant="4" id="155-sG-43B"/>
                             <constraint firstItem="v9R-CY-dJ4" firstAttribute="bottom" secondItem="NWz-tS-mnL" secondAttribute="bottom" id="43w-vH-GRA"/>
+                            <constraint firstItem="v9R-CY-dJ4" firstAttribute="top" secondItem="LdU-uW-gPd" secondAttribute="bottom" constant="16" id="4eR-yB-HFp"/>
                             <constraint firstItem="Fl0-uo-kjp" firstAttribute="leading" secondItem="NWz-tS-mnL" secondAttribute="leading" constant="10" id="AZY-OH-xZ4"/>
                             <constraint firstItem="Fl0-uo-kjp" firstAttribute="top" secondItem="NWz-tS-mnL" secondAttribute="top" constant="4" id="Al7-9B-gD9"/>
+                            <constraint firstItem="LdU-uW-gPd" firstAttribute="top" secondItem="NWz-tS-mnL" secondAttribute="top" constant="10" id="E9F-S1-HMH"/>
                             <constraint firstItem="v9R-CY-dJ4" firstAttribute="trailing" secondItem="NWz-tS-mnL" secondAttribute="trailing" id="GqV-ct-nPY"/>
                             <constraint firstItem="v9R-CY-dJ4" firstAttribute="leading" secondItem="NWz-tS-mnL" secondAttribute="leading" id="caO-6H-4EU"/>
+                            <constraint firstItem="NWz-tS-mnL" firstAttribute="trailing" secondItem="kNF-LI-aJx" secondAttribute="trailing" constant="10" id="fTg-ZG-Y4K"/>
+                            <constraint firstItem="kNF-LI-aJx" firstAttribute="leading" secondItem="LdU-uW-gPd" secondAttribute="trailing" constant="20" id="rr6-2r-j3s"/>
+                            <constraint firstItem="v9R-CY-dJ4" firstAttribute="top" secondItem="kNF-LI-aJx" secondAttribute="bottom" constant="10" id="sDD-FG-KW9"/>
                             <constraint firstItem="v9R-CY-dJ4" firstAttribute="top" secondItem="3vu-ew-oGb" secondAttribute="top" constant="100" id="wFY-SC-3M1"/>
                         </constraints>
                     </view>

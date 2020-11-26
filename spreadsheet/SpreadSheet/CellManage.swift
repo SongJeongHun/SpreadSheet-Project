@@ -17,12 +17,12 @@ class CellManage{
     func activeCell(_ collectionView: UICollectionView,_ indexPath: IndexPath){
         //셀활성화 --------> 나중에 여기에 connect 콜?
         if let cell = collectionView.cellForItem(at: indexPath) as? spreadSheetCell{
-            let button = UIButton(frame: CGRect(x: cell.frame.minX, y:  cell.frame.minY, width: 20, height: 20))
-            button.center = CGPoint(x: button.center.x, y: button.center.y)
-            button.setTitle("T", for: .normal)
-            button.setTitleColor(#colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1), for: .normal)
-            button.addTarget(collectionView, action: Selector("cliked:"),  for: .touchUpInside)
-            collectionView.addSubview(button)
+//            let button = UIButton(frame: CGRect(x: cell.frame.minX, y:  cell.frame.minY, width: 20, height: 20))
+//            button.center = CGPoint(x: button.center.x, y: button.center.y)
+//            button.setTitle("T", for: .normal)
+//            button.setTitleColor(#colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1), for: .normal)
+//            button.addTarget(collectionView, action: Selector("cliked:"),  for: .touchUpInside)
+//            collectionView.addSubview(button)
             active(cell,indexPath)
         }
         print("Selected Cell --------->\(selectedCell)")

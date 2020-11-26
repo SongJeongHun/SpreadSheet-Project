@@ -19,16 +19,16 @@ class SpreadSheetLayout: UICollectionViewLayout {
         guard let collectionView = collectionView else {return}
         if sheetModel.layoutAttributes.count != collectionView.numberOfSections {
             sheetModel.createCell(collectionView: collectionView)
+            sheetModel.setPointer(section: collectionView.numberOfSections, item: sheetModel.cellStandard.colums)
             return
         }
-        let forElement = layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 0, height: 0))!
+        var forElement:[UICollectionViewLayoutAttributes]
+        forElement = layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 0, height: 0))!
+        print(forElement.count)
         sheetModel.stickyHeader(at: collectionView,forElement: forElement)
     }
     override var collectionViewContentSize: CGSize {
         return sheetModel.contentSize
-    }
-    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return sheetModel.layoutAttributes[indexPath.section][indexPath.row]
     }
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         return sheetModel.sectionAttribute
@@ -38,24 +38,38 @@ class SpreadSheetLayout: UICollectionViewLayout {
     }
 }
 class layoutModel{
+    var numOfSections:Int = 100 + 1
     var contentSize:CGSize = .zero
-    var numberOfSections = 100 + 1
+    var pointerSection = 0
+    var pointerItem = 8
     var sectionAttribute:[UICollectionViewLayoutAttributes] = []
     var layoutAttributes:[[UICollectionViewLayoutAttributes]] = []
     var cellStandard:layoutStandard = layoutStandard(colums: 8, width: 100, height: 25)
     func initLayout(colums: Int, width: Int, height: Int){
         cellStandard = layoutStandard(colums: colums, width: width, height: height)
     }
+    func addNumOfSections(_ input:Int){
+        self.numOfSections += input
+    }
+    func setPointer(section:Int,item:Int){
+        self.pointerSection = section
+    }
+    func addColums(_ input:Int){
+        cellStandard.colums = input
+    }
     func createCell(collectionView:UICollectionView){
-        var x = 0
-        var y = 0
+        var attribute:[UICollectionViewLayoutAttributes]
+        var x = cellStandard.contentOffx
+        var y = cellStandard.contentOffy
         var contentwidth:CGFloat = 0
-        for section in 0..<collectionView.numberOfSections{
-            for index in 0..<cellStandard.colums{
+        for section in pointerSection..<collectionView.numberOfSections{
+            attribute = []
+            for index in 0..<pointerItem{
                 let indexPath = IndexPath(item: index, section: section)
                 let layout = UICollectionViewLayoutAttributes(forCellWith: indexPath)
                 layout.frame = CGRect(x: x, y: y, width: cellStandard.width, height: cellStandard.height)
                 sectionAttribute.append(layout)
+                attribute.append(layout)
                 x += cellStandard.width
                 if x / cellStandard.width == cellStandard.colums {
                     contentwidth = CGFloat(x)
@@ -63,39 +77,51 @@ class layoutModel{
                     y += cellStandard.height
                 }
             }
-            layoutAttributes.append(sectionAttribute)
+            layoutAttributes.append(attribute)
         }
         if let layout = layoutAttributes.last?.last {
             contentSize = CGSize(width: contentwidth, height: layout.frame.maxY)
         }
+        cellStandard.contentOffx = x
+        cellStandard.contentOffy = y
     }
     func stickyHeader(at collectionView:UICollectionView,forElement : [UICollectionViewLayoutAttributes]){
         for section in 0..<collectionView.numberOfSections{
             for index in 0..<cellStandard.colums{
                 let layouts = forElement
                 let indexs = cellStandard.colums*section
+                //0열 고정
                 var frame = layouts[indexs].frame
                 frame.origin.x = collectionView.contentOffset.x
                 layouts[indexs].frame = frame
                 layouts[indexs].zIndex = 100
-                let layout = layouts[index]
-                if section == 0{
-                    var frame = layout.frame
-                    frame.origin.y = collectionView.contentOffset.y
-                    layout.frame = frame
-                    layout.zIndex = 100
-                }
+                //0행 고정
+                var layout = layouts[index]
+                frame = layout.frame
+                frame.origin.y = collectionView.contentOffset.y
+                layout.frame = frame
+                layout.zIndex = 100
+                //(0,0)고정
+                layout = layouts[0]
+                frame = layout.frame
+                frame.origin = CGPoint(x: collectionView.contentOffset.x,y: collectionView.contentOffset.y)
+                layout.frame = frame
+                layout.zIndex = 101
             }
         }
     }
 }
 struct layoutStandard{
-    let colums:Int
+    var colums:Int
     let width:Int
     let height:Int
+    var contentOffx:Int = 0
+    var contentOffy:Int = 0
     init(colums:Int,width:Int,height:Int){
         self.colums = colums
         self.width = width
         self.height = height
+        self.contentOffy = 0
+        self.contentOffx = 0
     }
 }
