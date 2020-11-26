@@ -4,11 +4,11 @@ class SpreadSheetViewController: UIViewController {
     let sheetModel = layoutModel()
     let cellManager = CellManage()
     @IBOutlet weak var collectionView:UICollectionView!
-    @IBAction func addCol(_ sender:Any){
+    @IBAction func addRow(_ sender:Any){
         sheetModel.addNumOfSections(1)
         collectionView.reloadData()
     }
-    @IBAction func addrow(_ sender:Any){
+    @IBAction func addCol(_ sender:Any){
         //삭제 하고 다시그리기?
         //세로줄만 추가?
     }

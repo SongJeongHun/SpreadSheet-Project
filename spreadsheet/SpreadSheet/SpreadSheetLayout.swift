@@ -55,7 +55,7 @@ class layoutModel{
         self.pointerSection = section
     }
     func addColums(_ input:Int){
-        cellStandard.colums = input
+        cellStandard.colums += input
     }
     func createCell(collectionView:UICollectionView){
         var attribute:[UICollectionViewLayoutAttributes]
