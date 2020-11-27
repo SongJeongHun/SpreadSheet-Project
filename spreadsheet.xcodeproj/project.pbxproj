@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A72922C825667F43001C44CC /* CellManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72922C725667F43001C44CC /* CellManage.swift */; };
+		A730D2FE25713CA7006762A7 /* layoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A730D2FD25713CA7006762A7 /* layoutModel.swift */; };
 		A74D01BD255FC25F0008CC1A /* SpreadSheetLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74D01BC255FC25F0008CC1A /* SpreadSheetLayout.swift */; };
 		A75B25CD2562647A0085E674 /* SpreadListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B25CC2562647A0085E674 /* SpreadListViewController.swift */; };
 		A765C3F92568DEDD001979DD /* test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A765C3F82568DEDD001979DD /* test.storyboard */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		A72922C725667F43001C44CC /* CellManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellManage.swift; sourceTree = "<group>"; };
+		A730D2FD25713CA7006762A7 /* layoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = layoutModel.swift; sourceTree = "<group>"; };
 		A74D01BC255FC25F0008CC1A /* SpreadSheetLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadSheetLayout.swift; sourceTree = "<group>"; };
 		A75B25CC2562647A0085E674 /* SpreadListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadListViewController.swift; sourceTree = "<group>"; };
 		A765C3F82568DEDD001979DD /* test.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = test.storyboard; sourceTree = "<group>"; };
@@ -45,12 +47,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A730D2FC25713C64006762A7 /* SpreadSheetLayout */ = {
+			isa = PBXGroup;
+			children = (
+				A74D01BC255FC25F0008CC1A /* SpreadSheetLayout.swift */,
+				A730D2FD25713CA7006762A7 /* layoutModel.swift */,
+			);
+			path = SpreadSheetLayout;
+			sourceTree = "<group>";
+		};
 		A75B25C0256263830085E674 /* SpreadSheet */ = {
 			isa = PBXGroup;
 			children = (
 				A72922C725667F43001C44CC /* CellManage.swift */,
 				A7FF9C9F255FB11B00EE2D68 /* SpreadSheetViewController.swift */,
-				A74D01BC255FC25F0008CC1A /* SpreadSheetLayout.swift */,
 			);
 			path = SpreadSheet;
 			sourceTree = "<group>";
@@ -91,8 +101,9 @@
 			isa = PBXGroup;
 			children = (
 				A75B25C2256263880085E674 /* Login */,
-				A75B25C1256263860085E674 /* SpreadList */,
 				A75B25C0256263830085E674 /* SpreadSheet */,
+				A730D2FC25713C64006762A7 /* SpreadSheetLayout */,
+				A75B25C1256263860085E674 /* SpreadList */,
 				A7FF9C89255FAD3B00EE2D68 /* AppDelegate.swift */,
 				A7FF9C8B255FAD3B00EE2D68 /* SceneDelegate.swift */,
 				A7FF9C8F255FAD3B00EE2D68 /* Main.storyboard */,
@@ -175,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A75B25CD2562647A0085E674 /* SpreadListViewController.swift in Sources */,
+				A730D2FE25713CA7006762A7 /* layoutModel.swift in Sources */,
 				A7FF9CA0255FB11B00EE2D68 /* SpreadSheetViewController.swift in Sources */,
 				A72922C825667F43001C44CC /* CellManage.swift in Sources */,
 				A74D01BD255FC25F0008CC1A /* SpreadSheetLayout.swift in Sources */,
