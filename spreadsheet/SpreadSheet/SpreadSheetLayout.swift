@@ -14,34 +14,33 @@
 import UIKit
 
 class SpreadSheetLayout: UICollectionViewLayout {
-    let sheetModel = layoutModel()
     override func prepare() {
         guard let collectionView = collectionView else {return}
-        if sheetModel.layoutAttributes.count != collectionView.numberOfSections {
-            sheetModel.createCell(collectionView: collectionView)
-            sheetModel.setPointer(section: collectionView.numberOfSections, item: sheetModel.cellStandard.colums)
+        if layoutModel.shared.layoutAttributes.count != collectionView.numberOfSections{
+            layoutModel.shared.createCell(collectionView: collectionView)
+            layoutModel.shared.setPointer(section: collectionView.numberOfSections, item: layoutModel.shared.cellStandard.colums)
             return
         }
-        var forElement:[UICollectionViewLayoutAttributes]
-        forElement = layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 0, height: 0))!
-        print(forElement.count)
-        sheetModel.stickyHeader(at: collectionView,forElement: forElement)
+        layoutModel.shared.stickyHeader(at: collectionView,forElement: layoutModel.shared.sectionAttribute)
     }
     override var collectionViewContentSize: CGSize {
-        return sheetModel.contentSize
+        return layoutModel.shared.contentSize
     }
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        return sheetModel.sectionAttribute
+        return layoutModel.shared.sectionAttribute
     }
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         true
     }
 }
 class layoutModel{
+    static let shared = layoutModel()
+    private init(){
+    }
     var numOfSections:Int = 100 + 1
     var contentSize:CGSize = .zero
     var pointerSection = 0
-    var pointerItem = 8
+    var pointerItem = 0
     var sectionAttribute:[UICollectionViewLayoutAttributes] = []
     var layoutAttributes:[[UICollectionViewLayoutAttributes]] = []
     var cellStandard:layoutStandard = layoutStandard(colums: 8, width: 100, height: 25)
@@ -53,9 +52,32 @@ class layoutModel{
     }
     func setPointer(section:Int,item:Int){
         self.pointerSection = section
+        self.pointerItem = item
     }
-    func addColums(_ input:Int){
-        cellStandard.colums += input
+    func addColums(collectionView:UICollectionView){
+        cellStandard.colums += 1
+        cellStandard.contentOffx = pointerItem * cellStandard.width
+        cellStandard.contentOffy = 0
+        var x = cellStandard.contentOffx
+        var y = cellStandard.contentOffy
+        for section in 0..<collectionView.numberOfSections{
+            for item in pointerItem..<cellStandard.colums{
+                let indexPath = IndexPath(item: item, section: section)
+                let layout = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+                layout.frame = CGRect(x: x, y: y, width: cellStandard.width, height: cellStandard.height)
+                sectionAttribute.insert(layout, at: section * cellStandard.colums + item)
+                layoutAttributes[section].append(layout)
+                x += cellStandard.width
+            }
+            x = cellStandard.contentOffx
+            y += cellStandard.height
+        }
+        if let layout = layoutAttributes.last?.last {
+            contentSize = CGSize(width: CGFloat(cellStandard.width * cellStandard.colums), height: layout.frame.maxY)
+        }
+        pointerItem = cellStandard.colums
+        cellStandard.contentOffx = 0
+        cellStandard.contentOffy = y
     }
     func createCell(collectionView:UICollectionView){
         var attribute:[UICollectionViewLayoutAttributes]
@@ -64,7 +86,7 @@ class layoutModel{
         var contentwidth:CGFloat = 0
         for section in pointerSection..<collectionView.numberOfSections{
             attribute = []
-            for index in 0..<pointerItem{
+            for index in 0..<cellStandard.colums{
                 let indexPath = IndexPath(item: index, section: section)
                 let layout = UICollectionViewLayoutAttributes(forCellWith: indexPath)
                 layout.frame = CGRect(x: x, y: y, width: cellStandard.width, height: cellStandard.height)
@@ -78,6 +100,7 @@ class layoutModel{
                 }
             }
             layoutAttributes.append(attribute)
+            
         }
         if let layout = layoutAttributes.last?.last {
             contentSize = CGSize(width: contentwidth, height: layout.frame.maxY)
@@ -85,11 +108,12 @@ class layoutModel{
         cellStandard.contentOffx = x
         cellStandard.contentOffy = y
     }
+    
     func stickyHeader(at collectionView:UICollectionView,forElement : [UICollectionViewLayoutAttributes]){
         for section in 0..<collectionView.numberOfSections{
             for index in 0..<cellStandard.colums{
                 let layouts = forElement
-                let indexs = cellStandard.colums*section
+                let indexs = cellStandard.colums * section
                 //0열 고정
                 var frame = layouts[indexs].frame
                 frame.origin.x = collectionView.contentOffset.x

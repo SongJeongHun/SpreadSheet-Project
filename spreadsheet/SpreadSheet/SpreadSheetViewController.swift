@@ -1,16 +1,27 @@
 import UIKit
 
 class SpreadSheetViewController: UIViewController {
-    let sheetModel = layoutModel()
     let cellManager = CellManage()
     @IBOutlet weak var collectionView:UICollectionView!
     @IBAction func addRow(_ sender:Any){
-        sheetModel.addNumOfSections(1)
-        collectionView.reloadData()
+        let alert = UIAlertController(title: "알림", message: "행 추가", preferredStyle: .alert)
+        alert.addTextField(configurationHandler: nil)
+        let ok = UIAlertAction(title: "확인", style: .default, handler: {ok in
+            guard let valStr = alert.textFields?[0].text else { return }
+            guard let value = Int(valStr) else { return }
+            layoutModel.shared.addNumOfSections(value)
+            self.collectionView.reloadData()
+        })
+        let cancel = UIAlertAction(title: "취소", style: .default, handler:nil)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
     }
     @IBAction func addCol(_ sender:Any){
         //삭제 하고 다시그리기?
         //세로줄만 추가?
+        layoutModel.shared.addColums(collectionView: collectionView)
+        collectionView.reloadData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +38,10 @@ extension SpreadSheetViewController:UICollectionViewDelegate{
 }
 extension SpreadSheetViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return sheetModel.numOfSections//-> 행의 개수(row)
+        return layoutModel.shared.numOfSections//-> 행의 개수(row)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sheetModel.cellStandard.colums    //-> 열의 개수(A~G)(col)
+        return layoutModel.shared.cellStandard.colums    //-> 열의 개수(A~G)(col)
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return cellManager.cellForItem(self.collectionView,indexPath)
