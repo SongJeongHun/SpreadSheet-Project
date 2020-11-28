@@ -180,14 +180,18 @@
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNF-LI-aJx">
                                 <rect key="frame" x="365" y="48" width="39" height="42"/>
-                                <state key="normal" title="열추가"/>
+                                <state key="normal" title="열추가">
+                                    <color key="titleColor" red="0.19072799400000001" green="0.3823267487" blue="0.15033159090000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="addCol:" destination="xyT-7T-9sj" eventType="touchUpInside" id="ieV-fE-I7Y"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LdU-uW-gPd">
                                 <rect key="frame" x="306" y="54" width="39" height="30"/>
-                                <state key="normal" title="행추가"/>
+                                <state key="normal" title="행추가">
+                                    <color key="titleColor" red="0.19072799400000001" green="0.3823267487" blue="0.15033159090000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="addRow:" destination="xyT-7T-9sj" eventType="touchUpInside" id="iQy-KH-Upx"/>
                                 </connections>

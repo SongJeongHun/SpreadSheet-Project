@@ -6,24 +6,48 @@
 //
 
 import UIKit
+
 class CellManage{
+    var button:UIButton = UIButton()
     var selectedCell:[IndexPath] = []
     //    var unSelectedCell:[UICollectionViewCell] = []
-    @IBAction func cliked(sender: UIButton!){
-        print("Cliked")
-        
+    @IBAction func buttonMoved(_ sender:UIButton,forEvent:UIEvent){
+        guard let touches = forEvent.touches(for: sender) else { return }
+        drag(sender, touches: touches)
     }
-    
+    func drag(_ sender:UIButton,touches:Set<UITouch>){
+        if let touch = touches.first{
+            guard let collectionView = sender.superview as? UICollectionView else {return}
+            let point = touch.location(in: sender.superview)
+            let item = Int(floor(point.x)) / layoutModel.shared.cellStandard.width
+            let section = Int(floor(point.y)) / layoutModel.shared.cellStandard.height
+            let indexPath = IndexPath(item: item, section: section)
+            guard !selectedCell.contains(indexPath) else {return}
+            active(cellForItem(collectionView, indexPath), indexPath)
+            collectionView.reloadData()
+            print("Touch IndexPath-->[\(section),\(item)]")
+        }
+    }
+    func addButton(view:UICollectionView){
+        removeButton()
+        let cell = cellForItem(view, selectedCell[0])
+        let config = UIImage.SymbolConfiguration(weight: .bold)
+        let image = UIImage(systemName: "arrowshape.turn.up.backward.circle",withConfiguration: config)
+        button = UIButton(frame: CGRect(x: cell.frame.minX, y:  cell.frame.minY, width: 15, height: 15))
+        button.setImage(image, for: .normal)
+        button.addTarget(self, action: #selector(buttonMoved(_:forEvent:)) ,  for: .touchDragInside)
+        button.addTarget(self, action: #selector(buttonMoved(_:forEvent:)) ,  for: .touchDragOutside)
+        view.addSubview(button)
+    }
+    func removeButton(){
+        button.removeFromSuperview()
+    }
     func activeCell(_ collectionView: UICollectionView,_ indexPath: IndexPath){
         //셀활성화 --------> 나중에 여기에 connect 콜?
         if let cell = collectionView.cellForItem(at: indexPath) as? spreadSheetCell{
-//            let button = UIButton(frame: CGRect(x: cell.frame.minX, y:  cell.frame.minY, width: 20, height: 20))
-//            button.center = CGPoint(x: button.center.x, y: button.center.y)
-//            button.setTitle("T", for: .normal)
-//            button.setTitleColor(#colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1), for: .normal)
-//            button.addTarget(collectionView, action: Selector("cliked:"),  for: .touchUpInside)
-//            collectionView.addSubview(button)
+            selectedCell = []
             active(cell,indexPath)
+            addButton(view: collectionView)
         }
         print("Selected Cell --------->\(selectedCell)")
         collectionView.reloadData()
@@ -31,21 +55,19 @@ class CellManage{
     func inactiveCell(_ collectionView: UICollectionView,_ indexPath: IndexPath){
         if let cell = collectionView.cellForItem(at: indexPath) as? spreadSheetCell{
             inactive(cell,indexPath)
+            removeButton()
             print("Selected Cell --------->\(selectedCell)")
         }
     }
     func active(_ cell:UICollectionViewCell,_ indexPath:IndexPath){
         //열 전체 클릭, 행 전체 클릭
-        if self.selectedCell != []{
-            inactive(cell, self.selectedCell[0])
-        }
-        
+//        if self.selectedCell != []{
+//            inactive(cell, self.selectedCell[0])
+//        }
         cell.backgroundColor = #colorLiteral(red: 0.7833575606, green: 0.9629107118, blue: 0.6487889886, alpha: 1)
         cell.layer.borderColor = #colorLiteral(red: 0.09923628718, green: 0.3880366087, blue: 0.109238632, alpha: 1)
         cell.layer.borderWidth = 2
         self.selectedCell.append(indexPath)
-        
-        
     }
     func inactive(_ cell:UICollectionViewCell,_ indexPath:IndexPath){
         cell.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -71,7 +93,6 @@ class CellManage{
         cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         cell.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         cell.layer.borderWidth = 0.5
-        
         if indexPath.section == 0{
             if indexPath.row == 0{
                 //(0,0)
@@ -102,7 +123,7 @@ class CellManage{
                 cell.test.text = ""
                 if selectedCell.contains(indexPath){
                     active(cell,indexPath)
-                    
+                   
                 }else{
                     inactive(cell,indexPath)
                 }

@@ -18,14 +18,13 @@ class SpreadSheetViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     @IBAction func addCol(_ sender:Any){
-        //삭제 하고 다시그리기?
-        //세로줄만 추가?
         layoutModel.shared.addColums(collectionView: collectionView)
         collectionView.reloadData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
 }
 extension SpreadSheetViewController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -38,7 +37,7 @@ extension SpreadSheetViewController:UICollectionViewDelegate{
 }
 extension SpreadSheetViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return layoutModel.shared.numOfSections//-> 행의 개수(row)
+        return layoutModel.shared.cellStandard.numOfSections//-> 행의 개수(row)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return layoutModel.shared.cellStandard.colums    //-> 열의 개수(A~G)(col)

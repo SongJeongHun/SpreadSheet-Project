@@ -9,7 +9,7 @@ import UIKit
 class layoutModel{
     static let shared = layoutModel()
     private init(){}
-    var numOfSections:Int = 100 + 1
+    
     var contentSize:CGSize = .zero
     var pointerSection = 0
     var pointerItem = 0
@@ -20,7 +20,7 @@ class layoutModel{
         cellStandard = layoutStandard(colums: colums, width: width, height: height)
     }
     func addNumOfSections(_ input:Int){
-        self.numOfSections += input
+        self.cellStandard.numOfSections += input
     }
     func setPointer(section:Int,item:Int){
         self.pointerSection = section
@@ -111,6 +111,7 @@ struct layoutStandard{
     var colums:Int
     let width:Int
     let height:Int
+    var numOfSections:Int = 100 + 1
     var contentOffx:Int = 0
     var contentOffy:Int = 0
     init(colums:Int,width:Int,height:Int){
