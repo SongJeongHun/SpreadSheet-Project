@@ -8,7 +8,8 @@
 import UIKit
 
 class CellManage{
-    var button:UIButton = UIButton()
+    var buttonTop:UIButton = UIButton()
+    var buttonBottom:UIButton = UIButton()
     var selectedCell:[IndexPath] = []
     //    var unSelectedCell:[UICollectionViewCell] = []
     @IBAction func buttonMoved(_ sender:UIButton,forEvent:UIEvent){
@@ -33,14 +34,20 @@ class CellManage{
         let cell = cellForItem(view, selectedCell[0])
         let config = UIImage.SymbolConfiguration(weight: .bold)
         let image = UIImage(systemName: "arrowshape.turn.up.backward.circle",withConfiguration: config)
-        button = UIButton(frame: CGRect(x: cell.frame.minX, y:  cell.frame.minY, width: 15, height: 15))
-        button.setImage(image, for: .normal)
-        button.addTarget(self, action: #selector(buttonMoved(_:forEvent:)) ,  for: .touchDragInside)
-        button.addTarget(self, action: #selector(buttonMoved(_:forEvent:)) ,  for: .touchDragOutside)
-        view.addSubview(button)
+        buttonTop = UIButton(frame: CGRect(x: cell.frame.minX-7, y:  cell.frame.minY-7, width: 15, height: 15))
+        buttonBottom = UIButton(frame: CGRect(x: cell.frame.maxX-7, y:  cell.frame.maxY-7, width: 15, height: 15))
+        buttonBottom.setImage(image, for: .normal)
+        buttonBottom.addTarget(self, action: #selector(buttonMoved(_:forEvent:)) ,  for: .touchDragInside)
+        buttonBottom.addTarget(self, action: #selector(buttonMoved(_:forEvent:)) ,  for: .touchDragOutside)
+        buttonTop.setImage(image, for: .normal)
+        buttonTop.addTarget(self, action: #selector(buttonMoved(_:forEvent:)) ,  for: .touchDragInside)
+        buttonTop.addTarget(self, action: #selector(buttonMoved(_:forEvent:)) ,  for: .touchDragOutside)
+        view.addSubview(buttonTop)
+        view.addSubview(buttonBottom)
     }
     func removeButton(){
-        button.removeFromSuperview()
+        buttonTop.removeFromSuperview()
+        buttonBottom.removeFromSuperview()
     }
     func activeCell(_ collectionView: UICollectionView,_ indexPath: IndexPath){
         //셀활성화 --------> 나중에 여기에 connect 콜?
