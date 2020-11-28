@@ -60,14 +60,12 @@ class CellManage{
         }
     }
     func active(_ cell:UICollectionViewCell,_ indexPath:IndexPath){
-        //열 전체 클릭, 행 전체 클릭
-//        if self.selectedCell != []{
-//            inactive(cell, self.selectedCell[0])
-//        }
         cell.backgroundColor = #colorLiteral(red: 0.7833575606, green: 0.9629107118, blue: 0.6487889886, alpha: 1)
         cell.layer.borderColor = #colorLiteral(red: 0.09923628718, green: 0.3880366087, blue: 0.109238632, alpha: 1)
         cell.layer.borderWidth = 2
-        self.selectedCell.append(indexPath)
+        if !selectedCell.contains(indexPath){
+            self.selectedCell.append(indexPath)
+        }
     }
     func inactive(_ cell:UICollectionViewCell,_ indexPath:IndexPath){
         cell.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
